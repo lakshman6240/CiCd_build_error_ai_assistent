@@ -1,0 +1,19 @@
+name: On CI Failure
+
+on:
+  workflow_run:
+    workflows: ["Node.js CI"]   # must match the first workflow name
+    types:
+      - completed
+
+jobs:
+  handle-failure:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print failure message
+        run: echo "🚨 CI workflow failed! Take action."
+
+      - name: Example - Send notification (placeholder)
+        run: echo "You can integrate Slack, email, etc."
