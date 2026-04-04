@@ -1,9 +1,5 @@
 name: Global Failure Handler
 
-permissions:
-  actions: read
-  contents: read
-
 on:
   workflow_run:
     workflows:
@@ -17,5 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print failed workflow
+      - name: Print failure message
+        run: echo "🚨 CI workflow failed! Take action."
+
+      - name: Example - Send notification (placeholder)
+        run: echo "You can integrate Slack, email, etc."
+
+      - name: Print failed workflow 
         run: echo "Failed: ${{ github.event.workflow_run.name }}"
