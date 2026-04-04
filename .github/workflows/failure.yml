@@ -1,5 +1,7 @@
 name: Global Failure Handler
-
+permissions: 
+  actions: read 
+  contents: read
 on:
   workflow_run:
     workflows:
