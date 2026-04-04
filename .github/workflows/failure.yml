@@ -18,6 +18,3 @@ jobs:
 
       - name: Example - Send notification (placeholder)
         run: echo "You can integrate Slack, email, etc."
-
-      - name: Print failed workflow 
-        run: echo "Failed: ${{ github.event.workflow_run.name }}"
