@@ -1,10 +1,7 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,4 +11,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Print
-        run: echo "hai"
+        run: echo "hai
