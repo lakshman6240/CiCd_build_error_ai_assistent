@@ -13,8 +13,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print failure message
-        run: echo "🚨 CI workflow failed! Take action."
+      - name: Print failed workflow
+        run: echo "Failed: ${{ github.event.workflow_run.name }}"
 
-      - name: Example - Send notification (placeholder)
-        run: echo "You can integrate Slack, email, etc."
+      - name: Download logs
+        run: |
+          curl -L \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github+json" \
+          https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/logs \
+          -o logs.zip
+
+      - name: Unzip logs
+        run: unzip logs.zip -d logs
+
+      - name: Show logs
+        run: |
+          echo "===== ERROR LOGS ====="
+          cat logs/* || true
+      
+      - name: Show only errors
+        run: |
+          grep -i "error" logs/* || echo "No errors found"
